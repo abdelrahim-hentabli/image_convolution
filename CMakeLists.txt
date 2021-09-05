@@ -1,0 +1,15 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
+
+ADD_SUBDIRECTORY(googletest)
+
+SET(CMAKE_CXX_STANDARD 11)
+
+ADD_EXECUTABLE(manip_image
+    src/main.cpp
+)
+
+ADD_EXECUTABLE(test
+    tests/test.cpp
+)
+
+TARGET_LINK_LIBRARIES(test gtest)
