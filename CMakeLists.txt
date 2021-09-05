@@ -1,15 +1,17 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.16)
 
-ADD_SUBDIRECTORY(googletest)
-
 SET(CMAKE_CXX_STANDARD 11)
 
-ADD_EXECUTABLE(manip_image
-    src/main.cpp
-)
+project(image_convolution)
 
-ADD_EXECUTABLE(test
-    tests/test.cpp
-)
+ADD_SUBDIRECTORY(./src ../bin/main)
 
-TARGET_LINK_LIBRARIES(test gtest)
+ADD_SUBDIRECTORY(./tests ../bin/tests)
+
+ADD_SUBDIRECTORY(googletest)
+
+find_package(OpenMP)
+if(OpenMP_CXX_FOUND)
+    TARGET_LINK_LIBRARIES(manip_image PUBLIC OpenMP::OpenMP_CXX)
+    TARGET_LINK_LIBRARIES(test PUBLIC OpenMP::OpenMP_CXX gtest)
+endif()
